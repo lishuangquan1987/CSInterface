@@ -1,0 +1,5 @@
+E:\Project2019\CSInterface\CSInterface\bin\Debug\CSInterface.dll
+E:\Project2019\CSInterface\CSInterface\bin\Debug\CSInterface.pdb
+E:\Project2019\CSInterface\CSInterface\obj\x86\Debug\CSInterface.csproj.CoreCompileInputs.cache
+E:\Project2019\CSInterface\CSInterface\obj\x86\Debug\CSInterface.dll
+E:\Project2019\CSInterface\CSInterface\obj\x86\Debug\CSInterface.pdb
