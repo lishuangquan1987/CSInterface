@@ -13,6 +13,7 @@ namespace CSInterface
         object InvokeMemberMethod(string assemblyName, string methodName,bool hasParas, object[] paras);
         object InvokeStaticMethod(string assemblyName, string methodName,bool hasParas, object[] paras);
         object CreateInstance(string assemblyName, string className,bool hasParas,object[] paras);
+        object InvokeObjectMethod(object obj, string methodName, bool hasParas, object[] paras);
         string GetAppDirectory();
     }
 

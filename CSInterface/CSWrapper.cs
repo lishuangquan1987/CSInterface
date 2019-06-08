@@ -10,7 +10,6 @@ namespace CSInterface
 {
     [ComVisible(true)]
     [Guid("35A5CE1E-551C-41EC-81D4-005318550119")]
-    [ProgId("MyLib.MyClassa")]
     public class CSWrapper:ICSWrapper
     {
         public CSWrapper()
@@ -30,7 +29,13 @@ namespace CSInterface
                 //说明是路径
                 if (!Path.IsPathRooted(assemblyName))
                 {
+                    //在CSInterface的路径下寻找dll
                     assemblyName = Path.Combine(GetAppDirectory(), assemblyName);
+                    if (!File.Exists(assemblyName))
+                    {
+                        //在CSInterface的目录下寻找dll，不存在则到程序运行的目录下寻找
+                        assemblyName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, assemblyName);
+                    }
                 }
                 asm = Assembly.LoadFrom(assemblyName);
             }
@@ -108,6 +113,27 @@ namespace CSInterface
                     }
                 }
             }
+            return null;
+        }
+        public object InvokeObjectMethod(object obj, string methodName, bool hasParas, object[] paras)
+        {
+            MethodInfo method = null;
+            if (hasParas)
+            {
+                Type[] types = new Type[paras.Length];
+                for (int i = 0; i < paras.Length; i++)
+                {
+                    types[i] = paras[i].GetType();
+                }
+                method = obj.GetType().GetMethod(methodName,types);
+                return method.Invoke(obj, paras);
+            }
+            else
+            {
+                method = obj.GetType().GetMethod(methodName, new Type[] { });
+                return method.Invoke(obj,null);
+            }
+            
             return null;
         }
         public string GetAppDirectory()
