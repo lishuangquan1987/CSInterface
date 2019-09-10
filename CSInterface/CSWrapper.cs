@@ -24,7 +24,7 @@ namespace CSInterface
         private Assembly LoadAssembly(string assemblyName)
         {
             Assembly asm = null;
-            if (assemblyName.Contains(".dll"))
+            if (assemblyName.ToLower().Contains(".dll")||assemblyName.ToLower().Contains(".exe"))
             {
                 //说明是路径
                 if (!Path.IsPathRooted(assemblyName))
@@ -133,8 +133,6 @@ namespace CSInterface
                 method = obj.GetType().GetMethod(methodName, new Type[] { });
                 return method.Invoke(obj,null);
             }
-            
-            return null;
         }
         public string GetAppDirectory()
         {
